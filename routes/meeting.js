@@ -1,18 +1,18 @@
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user');
+var Meeing = require('../models/meeting');
 
 
 // /api/user
 router.route('/')
   .get(function (req, res) {
 
-    User.find(function (err, users) {
+    Meeing.find(function (err, meetings) {
       if (err) {
         res.send(err);
       }
 
-      console.log(res.json(users))
+      console.log(res.json(meetings))
     })
   })
 
@@ -20,7 +20,7 @@ router.route('/')
 router.route('/:name')
   .post(function (req, res) {
 
-    var user = new User(); // create a new instance of the Bear model
+    var meeting = new Meeing(); // create a new instance of the Bear model
     user.name = req.params.name; // set the bears name (comes from the request)
 
     user.save(function (err) {
@@ -36,7 +36,7 @@ router.route('/:name')
   })
 
   .delete(function (req, res) {
-    User.remove({
+    Meeing.remove({
       _id: req.params.name
     }, function (err, user) {
       if (err) {
