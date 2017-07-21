@@ -15,6 +15,10 @@ router.route('/')
       console.log(res.json(users))
     })
   })
+  .post(function (req, res) {
+    var user = new User();
+    res.json(req.body);
+  })
 
 // /api/user/:name
 router.route('/:name')
