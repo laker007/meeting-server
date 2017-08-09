@@ -3,7 +3,7 @@ var router = express.Router();
 var Meeing = require('../models/meeting');
 
 
-// /api/user
+// /api/meeting
 router.route('/')
   .get(function (req, res) {
 
@@ -15,8 +15,23 @@ router.route('/')
       console.log(res.json(meetings))
     })
   })
+  .post(function (req, res) {
+    console.log(req);
+    console.log(res);
+    var meeting = new Meeing();
 
-// /api/user/:name
+    meeting.save(function (err) {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json({
+          message: 'Meeting created!'
+        })
+      }
+    })
+  })
+
+// /api/meeting/:name
 router.route('/:name')
   .post(function (req, res) {
 
