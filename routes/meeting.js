@@ -16,9 +16,13 @@ router.route('/')
     })
   })
   .post(function (req, res) {
-    console.log(req);
-    console.log(res);
+    console.log(1);
+    console.log(req.query);
+    console.log(req.body);
+
     var meeting = new Meeing();
+    meeting.topic = req.body.topic;
+    meeting.start = req.body.start;
 
     meeting.save(function (err) {
       if (err) {
@@ -31,19 +35,19 @@ router.route('/')
     })
   })
 
-// /api/meeting/:name
-router.route('/:name')
+// /api/meeting/:topic
+router.route('/:topic')
   .post(function (req, res) {
 
     var meeting = new Meeing(); // create a new instance of the Bear model
-    user.name = req.params.name; // set the bears name (comes from the request)
+    meeting.topic = req.params.topic; // set the bears name (comes from the request)
 
-    user.save(function (err) {
+    meeting.save(function (err) {
       if (err)
         res.send(err);
 
       res.json({
-        message: 'User created!'
+        message: 'Meeting created!'
       });
     });
 
